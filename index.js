@@ -1,9 +1,13 @@
 
+require('dotenv').config();
 var request = require("request");
 var fs = require('fs');
 
 var options = {
   url: "",
+  auth: {
+    bearer: process.env.token
+  },
   headers: {
     'User-Agent': 'request'
   }
@@ -31,7 +35,7 @@ function callback () {
     // get all the avatar_url and login names and store them in array
     for (i in htmlBody) {
       avatarURL.push(htmlBody[i].avatar_url);
-      avatarName.push(htmlBody[i].login);
+      loginName.push(htmlBody[i].login);
     }
 
     // call downloadImageByURL for each object
